@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Results</string>
+    <string name="enter_registration_num">Enter Registration Number</string>
+    <string name="submit">submit</string>
+    <string name="checkEnter">Enter Registration ID</string>
+    <string name="checkPeriod">Select Period From List</string>
+    <string name="regNotFound">REGISTRATION ID NOT FOUND</string>
+    <string name="fetch">Fetching Results…</string>
+    <string name="fetched">Results Fetched From SMIT</string>
+    <string name="checkNetwork">Check Internet Connection</string>
+
+
+    <string name="subCodeText">Sub Code: </string>
+    <string name="subText">Subject: </string>
+    <string name="total">Total: %s</string>
+    <string name="totalText">Total: </string>
+    <string name="credit">Credit: %s</string>
+    <string name="creditText">Credit: </string>
+    <string name="gradeText">Grade: </string>
+    <string name="internal">Internal: %s</string>
+    <string name="internalText">Internal: </string>
+    <string name="external">External: %s</string>
+    <string name="externalText">External: </string>
+    <string name="launcher_icon">launcher icon</string>
+    <string name="developer">Developed by Gautam Chandra Saha</string>
+    <string name="copyright">© 2021</string>
+
+
+    <string-array name="period">
+        <item>select period</item>
+        <item>March Sem(First Year Only) 2021</item>
+        <item>Jan Supplementary 2021</item>
+        <item>Nov/Dec 2020</item>
+        <item>May/June 2020</item>
+        <item>Nov/Dec 2019</item>
+        <item>May/June 2019</item>
+        <item>Nov/Dec 2018</item>
+        <item>May/June 2018</item>
+        <item>Nov/Dec 2017</item>
+    </string-array>
+</resources>

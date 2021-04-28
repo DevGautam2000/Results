@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_text"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/getId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen20dp"
+        android:layout_marginTop="@dimen/dimen80dp"
+        android:layout_marginRight="@dimen/dimen20dp"
+        android:layout_marginBottom="@dimen/dimen20dp"
+        android:autofillHints="no"
+        android:gravity="center"
+        android:hint="@string/enter_registration_num"
+        android:inputType="number"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/periodList"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen50dp"
+        android:layout_margin="@dimen/dimen20dp"
+        android:background="@drawable/bg_spinner"
+        android:popupBackground="@drawable/bg_spinner_popup" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen20dp"
+        android:background="@drawable/btn_danger"
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        app:backgroundTint="@null" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen20dp"
+        android:padding="10dp" />
+
+</LinearLayout>
