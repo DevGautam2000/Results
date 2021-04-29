@@ -9,10 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="spinner_bg">#FFFFFFFF</color>
     <color name="list_bg">#63B1FA</color>
-    <color name="list_text">#FF000000</color>
+    <color name="list_text">#A19999</color>
     <color name="color_text">#FFFFFFFF</color>
     <color name="color_primary">#63B1FA</color>
     <color name="btn_danger">#FF7D7D</color>
+    <color name="washed_btn_danger">#F8ACAC</color>
+    <color name="washed_yellow">#FAF86E</color>
     <color name="btn_go">#8CE532</color>
     <color name="color_secondary">#266CAE</color>
     <color name="dark_blue_inversion">#1C5990</color>
@@ -20,7 +22,7 @@
 
     <!--  color palette for list_view  -->
     <color name="washed_red">#FF7D7D</color>
-    <color name="tanned_white">#C1C1C1</color>
+    <color name="tanned_white">#D1C7CB</color>
     <color name="washed_blue">#63B1FA</color>
     <color name="dull_yellow">#FA9A0A</color>
     <color name="washed_purple">#748DE8</color>

@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private var id: String? = null
     private lateinit var getId: EditText
     private lateinit var submitButton: Button
+    private lateinit var dropDownButton: ImageView
     private lateinit var periodList: Spinner
     private var position: Int? = null
     private var period: String? = null
@@ -43,6 +44,10 @@ class MainActivity : AppCompatActivity() {
 
         setAdapterToSpinner() // set the adapter to the spinner
 
+        dropDownButton.setOnClickListener {
+            periodList.performClick()
+        }
+
         //function of submit button after click
         submitButton.setOnClickListener { view ->
 
@@ -53,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             //fetching...
-            makeToast(getStringFromRes(R.string.fetch), Toast.LENGTH_LONG)
+            makeToast(getStringFromRes(R.string.fetch), Toast.LENGTH_SHORT)
             intentToResults() //intent to Results activity
 
         }
@@ -65,12 +70,16 @@ class MainActivity : AppCompatActivity() {
         getId = findViewById(R.id.getId)
         submitButton = findViewById(R.id.submitButton)
         periodList = findViewById(R.id.periodList)
+        dropDownButton = findViewById(R.id.dropDownButton)
     }
+
 
     //function to st the adapter to the spinner
     private fun setAdapterToSpinner() {
-        val adapter = ArrayAdapter.createFromResource(this,
-                R.array.period, android.R.layout.simple_spinner_item)
+        val adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.period, android.R.layout.simple_spinner_item
+        )
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         periodList.adapter = adapter
@@ -133,11 +142,13 @@ class MainActivity : AppCompatActivity() {
         //create a Runnable to delay this new intent
         val mHandler = Handler(Looper.getMainLooper())
         val monitor = Runnable {
-            startActivity(Intent(applicationContext, Results::class.java)
-                    .putExtra(ID_KEY, id!!)
-                    .putExtra(POSITION_KEY, position)
-                    .putExtra(PERIOD_KEY, period)
-                    .putExtra(SERIALIZABLE_LIST_KEY, list)) //put the extras to new activity
+            startActivity(
+                    Intent(applicationContext, Results::class.java)
+                            .putExtra(ID_KEY, id!!)
+                            .putExtra(POSITION_KEY, position)
+                            .putExtra(PERIOD_KEY, period)
+                            .putExtra(SERIALIZABLE_LIST_KEY, list)
+            ) //put the extras to new activity
         }
         mHandler.postDelayed(monitor, 500) //delays the intent to new activity
 

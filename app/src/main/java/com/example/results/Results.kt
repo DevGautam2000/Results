@@ -144,8 +144,7 @@ class Results : AppCompatActivity() {
                                 Toast.LENGTH_LONG
                         )
 
-                        parentActivityIntent //intent back to the parent activity
-                        finish() //remove current activity from stack
+                        intentToParent()
                     }
                 },
                 { /*error ->*/ // handle the error
@@ -154,10 +153,16 @@ class Results : AppCompatActivity() {
                             getStringFromRes(R.string.checkNetwork),
                             Toast.LENGTH_SHORT
                     )
+                    intentToParent()
                 })
         queueReq.add(jsonObjectRequest) /* NOTE: this line is crucial , no request is queued
                                           without this powerful  line of code*/
 
+    }
+
+    private fun intentToParent() {
+        parentActivityIntent //intent back to the parent activity
+        finish() //remove current activity from stack
     }
 
     //function to set data to list to be set to the inflated view in CustomAdapter

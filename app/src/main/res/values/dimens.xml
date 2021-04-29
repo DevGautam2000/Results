@@ -17,4 +17,7 @@
     <dimen name="dimen16sp">16sp</dimen>
     <dimen name="dimen25sp">25sp</dimen>
     <dimen name="dimen9dp">9dp</dimen>
+    <dimen name="dimen0dp">0dp</dimen>
+    <dimen name="dimen70dp">70dp</dimen>
+    <dimen name="dimen60dp">60dp</dimen>
 </resources>

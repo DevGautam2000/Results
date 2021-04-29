@@ -28,6 +28,14 @@
     <string name="copyright">© 2021</string>
     <string name="gpa_9_47">GPA:  9.47</string>
     <string name="gpa">GPA: %s</string>
+    <string name="drop_down_arrow">drop down arrow</string>
+    <string name="developer_contact">developer contact</string>
+    <string name="source">source</string>
+    <string name="warning">WARNING</string>
+    <string name="warning_text"><![CDATA[
+    The developer is not responsible for accuracy of marks
+    ]]></string>
+    <string name="results_fetched_from_smit">Results Fetched From SMIT</string>
 
 
     <string-array name="period">
