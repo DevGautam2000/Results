@@ -8,6 +8,8 @@
     <string name="fetch">Fetching Results…</string>
     <string name="fetched">Results Fetched From SMIT</string>
     <string name="checkNetwork">Check Internet Connection</string>
+    <string name="invalid_id">"Invalid ID"</string>
+    <string name="info">ID: %s for %s</string>
 
 
     <string name="subCodeText">Sub Code: </string>
@@ -24,6 +26,8 @@
     <string name="launcher_icon">launcher icon</string>
     <string name="developer">Developed by Gautam Chandra Saha</string>
     <string name="copyright">© 2021</string>
+    <string name="gpa_9_47">GPA:  9.47</string>
+    <string name="gpa">GPA: %s</string>
 
 
     <string-array name="period">

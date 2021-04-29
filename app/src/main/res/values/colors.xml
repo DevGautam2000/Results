@@ -15,6 +15,7 @@
     <color name="btn_danger">#FF7D7D</color>
     <color name="btn_go">#8CE532</color>
     <color name="color_secondary">#266CAE</color>
+    <color name="dark_blue_inversion">#1C5990</color>
 
 
     <!--  color palette for list_view  -->

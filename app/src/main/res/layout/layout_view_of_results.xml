@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="center"
-            android:textColor="@color/dark_blue"
+            android:textColor="@color/dark_blue_inversion"
             android:textSize="@dimen/dimen50sp"
             tools:text="S" />
 
@@ -68,7 +68,6 @@
             android:id="@+id/subjectTot"
             style="@style/tag_style"
             android:background="@drawable/total_tag_bg"
-
             tools:text="Total: 95.0" />
 
         <TextView

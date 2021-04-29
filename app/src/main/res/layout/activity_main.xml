@@ -40,11 +40,5 @@
         android:textColor="@color/white"
         app:backgroundTint="@null" />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen20dp"
-        android:padding="10dp" />
 
 </LinearLayout>

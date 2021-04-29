@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_text"
+    android:orientation="vertical"
+    android:padding="@dimen/dimen20dp"
+    tools:context=".Results">
+
+    <TextView
+        android:id="@+id/gpaTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/btn_danger"
+        android:gravity="center"
+        android:padding="@dimen/dimen12dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen25sp"
+        android:visibility="visible"
+        tools:text="@string/gpa_9_47" />
+
+    <TextView
+        android:id="@+id/infoTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen20dp"
+        android:background="@drawable/btn_bg"
+        android:gravity="center"
+        android:padding="@dimen/dimen9dp"
+        android:textColor="@color/dark_blue_inversion"
+        android:textSize="@dimen/dimen15sp"
+        android:visibility="visible"
+        tools:text="@string/info" />
+    <!--        tools:text="ID: 201900099 for May/June 2020" />-->
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" />
+
+</LinearLayout>

@@ -9,12 +9,13 @@ package com.example.results
 
 */
 
+//class to handle data to be set to list view as custom adapter
 data class Data(
-    val subject: String,
-    val subjectCode: String,
-    val internal: String,
-    val external: String,
-    val grade: String,
-    val total: String,
-    val credit: String,
+        val subject: String,
+        val subjectCode: String,
+        val internal: String,
+        val external: String,
+        val grade: String,
+        val total: String,
+        val credit: String,
 )

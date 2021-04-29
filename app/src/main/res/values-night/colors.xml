@@ -10,7 +10,7 @@
     <color name="spinner_bg">#FF000000</color>
     <color name="list_text">#FFFFFF</color>
     <color name="color_text">#FF000000</color>
-    <color name="list_bg">#8CE532</color>
     <color name="color_primary">#63B1FA</color>
     <color name="color_secondary">#266CAE</color>
+    <color name="dark_blue_inversion">#FFFFFF</color>
 </resources>
