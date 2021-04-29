@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             //fetching...
-            makeToast(getStringFromRes(R.string.fetch), Toast.LENGTH_SHORT)
+            makeToast(getStringFromRes(R.string.fetch))
             intentToResults() //intent to Results activity
 
         }
@@ -95,12 +95,12 @@ class MainActivity : AppCompatActivity() {
                 list = ArrayList()
             }
             else -> {
-                makeToast(getStringFromRes(R.string.checkEnter), Toast.LENGTH_SHORT)
+                makeToast(getStringFromRes(R.string.checkEnter))
                 return true
             }
         }
         if (getId.text.toString().length != 9) { //check for the id length
-            makeToast(getStringFromRes(R.string.invalid_id), Toast.LENGTH_SHORT)
+            makeToast(getStringFromRes(R.string.invalid_id))
             return true
         }
 
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         period = periodList.selectedItem.toString()
 
         if (position == 0) {
-            makeToast(getStringFromRes(R.string.checkPeriod), Toast.LENGTH_SHORT)
+            makeToast(getStringFromRes(R.string.checkPeriod))
             return true
         }
         return false
@@ -127,8 +127,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     //function to make toast
-    private fun makeToast(text: String, length: Int) {
-        Toast.makeText(applicationContext, text, length).show()
+    private fun makeToast(text: String) {
+        Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
     }
 
     //function to get string from the resources
