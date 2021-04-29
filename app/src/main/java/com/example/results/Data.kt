@@ -11,6 +11,7 @@ package com.example.results
 
 //class to handle data to be set to list view as custom adapter
 data class Data(
+        //declare set of variables to be used
         val subject: String,
         val subjectCode: String,
         val internal: String,
