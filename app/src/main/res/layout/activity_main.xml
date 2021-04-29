@@ -96,7 +96,7 @@
         android:layout_above="@id/credits"
         android:layout_marginStart="@dimen/dimen80dp"
         android:layout_marginEnd="@dimen/dimen80dp"
-        android:layout_marginBottom="@dimen/dimen12dp"
+        android:layout_marginBottom="@dimen/dimen20dp"
         android:background="@drawable/warn_text"
         android:gravity="center"
         android:padding="@dimen/dimen8dp"
