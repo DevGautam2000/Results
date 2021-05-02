@@ -1,4 +1,4 @@
-package com.example.results
+package com.devgautam.results
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -90,7 +90,7 @@ class CustomAdapter(private val arrayList: ArrayList<Data>) : BaseAdapter() {
                 }
 
         subjectGra?.text = itemInList.grade
-        
+
         subjectCode?.text = itemInList.subjectCode
 
     }

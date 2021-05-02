@@ -1,4 +1,4 @@
-package com.example.results
+package com.devgautam.results
 
 /*
 
@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.facebook.shimmer.ShimmerFrameLayout
 import org.json.JSONObject
 
 //handles the results to be fetched in this activity
@@ -29,21 +30,30 @@ class Results : AppCompatActivity() {
     private lateinit var listView: ListView
     private var id: String? = null
     private var period: String? = null
+    private var supplementaryCheck: String? = null
     private var position: Int? = null
     private lateinit var gpaTag: TextView
     private lateinit var infoTag: TextView
+    private lateinit var nameTag: TextView
     private var list: ArrayList<Data> = ArrayList()
     private var uri: String? = null
+    private var name: NameOfStudent = NameOfStudent("NA")
+    private lateinit var shimmerFrameLayout: ShimmerFrameLayout
 
     //list to store the links to be fetched from
     private val uriList: List<String> = listOf(
             march_sem_first_year_only_2021,
             jan_supplementary_2021,
             nov_dec_2020,
+            july_aug_supplementary_2020,
             may_june_2020,
+            jan_supplementary_2020,
             nov_dec_2019,
-            may_june_2019,
-            nov_dec_2018, may_june_2018,
+            june_july_supplementary_2019,
+            may_june_2019_OR_april_may_2019,
+            jan_supplementary_2019,
+            nov_dec_2018,
+            may_june_2018_OR_april_may_2018,
             nov_dec_2017
     )
 
@@ -54,18 +64,27 @@ class Results : AppCompatActivity() {
                 "https://devgautam2000.github.io/results.github.io/json/21.jan_supplementary_2021.json"
         const val nov_dec_2020 =
                 "https://devgautam2000.github.io/results.github.io/json/20.nov_dec_2020.json"
+        const val july_aug_supplementary_2020 =
+                "https://devgautam2000.github.io/results.github.io/json/20.july_aug_supplementary_2020.json"
         const val may_june_2020 =
                 "https://devgautam2000.github.io/results.github.io/json/20.may_june_2020.json"
+        const val jan_supplementary_2020 = //-------
+                "https://devgautam2000.github.io/results.github.io/json/20.jan_supplementary_2020.json"
         const val nov_dec_2019 =
                 "https://devgautam2000.github.io/results.github.io/json/19.nov_dec_2019.json"
-        const val may_june_2019 =
+        const val june_july_supplementary_2019 =
+                "https://devgautam2000.github.io/results.github.io/json/19.june_july_supplementary_2019.json"
+        const val may_june_2019_OR_april_may_2019 =
                 "https://devgautam2000.github.io/results.github.io/json/19.may_june_2019.json"
+        const val jan_supplementary_2019 =
+                "https://devgautam2000.github.io/results.github.io/json/19.jan_supplementary_2019.json"
         const val nov_dec_2018 =
                 "https://devgautam2000.github.io/results.github.io/json/18.nov_dec_2018.json"
-        const val may_june_2018 =
+        const val may_june_2018_OR_april_may_2018 =
                 "https://devgautam2000.github.io/results.github.io/json/18.may_june_2018.json"
         const val nov_dec_2017 =
                 "https://devgautam2000.github.io/results.github.io/json/17.nov_dec_2017.json"
+
 
         //the keys to get the extras from thr intent
         const val ID_KEY = "ID"
@@ -80,7 +99,17 @@ class Results : AppCompatActivity() {
         setContentView(R.layout.activity_results)
 
         getReferences() // get the references to the views to be used
+        shimmerFrameLayout.startShimmerAnimation()
         getExtraFromIntent() // get the extras from intent
+
+
+        supplementaryCheck = try {
+            period?.length?.minus(5)
+                    ?.let { period?.substring((period?.indexOf(" ")?.plus((1))!!), it) }
+        } catch (e: Exception) {
+            "abcd"
+        }
+
         tagGone() //set visibility of tags to GONE
 
         @Suppress("UNCHECKED_CAST") /*this cast is suppressed as it is confirmed that it
@@ -98,6 +127,8 @@ class Results : AppCompatActivity() {
         listView = findViewById(R.id.listView)
         gpaTag = findViewById(R.id.gpaTag)
         infoTag = findViewById(R.id.infoTag)
+        nameTag = findViewById(R.id.nameTag)
+        shimmerFrameLayout = findViewById(R.id.shimmerLayout)
     }
 
     //function to get all the extras from the intent
@@ -112,6 +143,7 @@ class Results : AppCompatActivity() {
     private fun tagGone() {
         gpaTag.visibility = View.GONE
         infoTag.visibility = View.GONE
+        nameTag.visibility = View.GONE
     }
 
     //function to clear list view
@@ -123,18 +155,34 @@ class Results : AppCompatActivity() {
     private fun queueJSONRequest() {
         uri = uriList[position!! - 1]
         val queueReq = Volley.newRequestQueue(this)
+
         val jsonObjectRequest = JsonObjectRequest(
                 Request.Method.GET, uri, null,
                 { response ->
                     try {
-                        setData(response) //set the fetched response to the list
-                        val gpaObj = GPACalculator(list) //instantiate an object of GPACalculator
-                        gpaObj.calcGpa() //invoke calcGpa() to calculate the GPA
-                        tagVisible() // set visibility of the tags to VISIBLE
-                        setTextToTag(gpaObj) //set the data to the tags
 
-                        makeToast(getStringFromRes(R.string.fetched),
-                                Toast.LENGTH_SHORT)
+                        shimmerFrameLayout.stopShimmerAnimation()
+                        shimmerFrameLayout.visibility = View.GONE
+
+                        setData(response) //set the fetched response to the list
+
+                        if (!supplementaryCheck.equals("supplementary", true)) {
+                            val gpaObj = GPACalculator(list) //instantiate an object of GPACalculator
+                            gpaObj.calcGpa() //invoke calcGpa() to calculate the GPA
+                            tagVisible() // set visibility of the tags to VISIBLE
+
+                            if (!name.nameOfStudent.equals("NA", true) || position != 1) {
+                                nameTagVisible()
+                                nameTag.text = name.nameOfStudent
+                            }
+
+                            setTextToTag(gpaObj) //set the data to the tags
+                        }
+
+                        makeToast(
+                                getStringFromRes(R.string.fetched),
+                                Toast.LENGTH_SHORT
+                        )
 
 
                     } catch (e: Exception) {
@@ -173,20 +221,29 @@ class Results : AppCompatActivity() {
 
         val keys = reg.keys() //set the keys , here key is the SUB CODE
 
-        //for each key set the data
+
         keys.forEach { ele ->
-            val keyObject = reg.getJSONObject(ele)
-            list.add(
-                    Data(
-                            subject = keyObject.getString("sub"),
-                            subjectCode = ele,
-                            internal = keyObject.getString("int"),
-                            external = keyObject.getString("ext"),
-                            grade = keyObject.getString("grade"),
-                            total = keyObject.getString("tot"),
-                            credit = keyObject.getString("credit")
-                    )
-            )
+
+            if (ele.equals("name", true) && position != 1) {
+                name = NameOfStudent(reg.getString("name"))
+            } else if (!ele.equals("name", true)) {
+
+                val keyObject = reg.getJSONObject(ele)
+
+                list.add(
+                        Data(
+
+                                subject = keyObject.getString("sub"),
+                                subjectCode = ele,
+                                internal = keyObject.getString("int"),
+                                external = keyObject.getString("ext"),
+                                grade = keyObject.getString("grade"),
+                                total = keyObject.getString("tot"),
+                                credit = keyObject.getString("credit")
+                        )
+                )
+
+            }
         }
 
         //set the custom adapter
@@ -199,22 +256,35 @@ class Results : AppCompatActivity() {
     }
 
     //function to set visibility of view to VISIBLE
-    //after some delay
+//after some delay
     private fun tagVisible() {
         val mHandler = Handler(Looper.getMainLooper())
         val monitor = Runnable {
             gpaTag.visibility = View.VISIBLE
             infoTag.visibility = View.VISIBLE
         }
-        mHandler.postDelayed(monitor, 500)
+        mHandler.postDelayed(monitor, 200)
+    }
+
+    private fun nameTagVisible() {
+        val mHandler = Handler(Looper.getMainLooper())
+        val monitor = Runnable {
+            nameTag.visibility = View.VISIBLE
+
+        }
+        mHandler.postDelayed(monitor, 200)
     }
 
     //function to set the data to the tags
     private fun setTextToTag(gpaObj: GPACalculator) {
-        gpaTag.text = String.format(resources.getString(R.string.gpa),
-                gpaObj.getGpaPoint().toString())
-        infoTag.text = String.format(resources.getString(R.string.info),
-                id, period)
+        gpaTag.text = String.format(
+                resources.getString(R.string.gpa),
+                gpaObj.getGpaPoint().toString()
+        )
+        infoTag.text = String.format(
+                resources.getString(R.string.info),
+                id, period
+        )
     }
 
     //function to make toast

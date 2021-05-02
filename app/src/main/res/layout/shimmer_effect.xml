@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen8dp"
+    android:background="@color/color_text"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/subject"
+            style="@style/text_style"
+            android:layout_margin="@dimen/dimen8dp"
+            android:layout_weight="2"
+            android:background="@drawable/shimmer_bg"
+            android:textColor="@color/washed_red"
+            android:textSize="@dimen/dimen16sp"
+            android:textStyle="bold"
+            tools:text="COMMUNICATION SKILLS" />
+
+        <TextView
+            android:id="@+id/subjectCode"
+            style="@style/text_style"
+            android:layout_margin="@dimen/dimen8dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/shimmer_bg"
+            android:gravity="center"
+            android:textColor="@color/white"
+            tools:text="CS1145" />
+
+        <TextView
+            android:id="@+id/subjectGra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen8dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/shimmer_bg"
+            android:gravity="center"
+            android:textColor="@color/dark_blue_inversion"
+            android:textSize="@dimen/dimen50sp"
+            tools:text="S" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:padding="8dp"
+        android:weightSum="4">
+
+
+        <TextView
+            android:id="@+id/subjectInt"
+            style="@style/tag_style"
+            android:layout_margin="@dimen/dimen5dp"
+            android:background="@drawable/shimmer_bg"
+            tools:text="Internal: 44.2" />
+
+        <TextView
+            android:id="@+id/subjectExt"
+            style="@style/tag_style"
+            android:layout_margin="@dimen/dimen5dp"
+            android:background="@drawable/shimmer_bg"
+            tools:text="External: 54.5" />
+
+        <TextView
+            android:id="@+id/subjectTot"
+            style="@style/tag_style"
+            android:layout_margin="@dimen/dimen5dp"
+            android:background="@drawable/shimmer_bg"
+            tools:text="Total: 95.0" />
+
+        <TextView
+            android:id="@+id/subjectCredit"
+            style="@style/tag_style"
+            android:layout_margin="@dimen/dimen5dp"
+            android:background="@drawable/shimmer_bg"
+            android:gravity="center"
+            tools:text="Credit: 3.0" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

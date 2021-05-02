@@ -1,4 +1,4 @@
-package com.example.results
+package com.devgautam.results
 /*
 
         DEVELOPED BY: GAUTAM CHANDRA SAHA
@@ -15,6 +15,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -80,6 +81,9 @@ class MainActivity : AppCompatActivity() {
                 this,
                 R.array.period, android.R.layout.simple_spinner_item
         )
+//
+//        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,
+//            resources.getStringArray(R.array.period))
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         periodList.adapter = adapter
@@ -99,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         }
-        if (getId.text.toString().length != 9) { //check for the id length
+        if (getId.text.toString().length < 6 || getId.text.toString().length > 9) { //check for the id length
             makeToast(getStringFromRes(R.string.invalid_id))
             return true
         }

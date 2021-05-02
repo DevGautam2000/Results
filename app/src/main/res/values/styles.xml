@@ -49,4 +49,9 @@
         <item name="android:padding">4dp</item>
         <item name="android:textSize">@dimen/dimen12sp</item>
     </style>
+
+    <style name="spinnerTheme" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="strokeColor">@color/inverted_black</item>
+        <item name="actionMenuTextColor">@color/inverted_black</item>
+    </style>
 </resources>

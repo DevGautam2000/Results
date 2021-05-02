@@ -32,10 +32,10 @@
     <string name="developer_contact">developer contact</string>
     <string name="source">source</string>
     <string name="warning">WARNING</string>
-    <string name="warning_text"><![CDATA[
-    The developer is not responsible for accuracy of marks
-    ]]></string>
+    <string name="warning_text"><![CDATA[NOTE: The developer is not responsible
+    for accuracy of marks]]></string>
     <string name="results_fetched_from_smit">Results Fetched From SMIT</string>
+    <string name="name">GAUTAM CHANDRA SAHA</string>
 
 
     <string-array name="period">
@@ -43,11 +43,15 @@
         <item>March Sem(First Year Only) 2021</item>
         <item>Jan Supplementary 2021</item>
         <item>Nov/Dec 2020</item>
+        <item>July/Aug Supplementary 2020</item>
         <item>May/June 2020</item>
+        <item>Jan Supplementary 2020</item>
         <item>Nov/Dec 2019</item>
-        <item>May/June 2019</item>
+        <item>June/July Supplementary 2020</item>
+        <item>April/May 2019</item>
+        <item>Jan Supplementary 2019</item>
         <item>Nov/Dec 2018</item>
-        <item>May/June 2018</item>
+        <item>April/May 2018</item>
         <item>Nov/Dec 2017</item>
     </string-array>
 </resources>

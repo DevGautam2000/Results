@@ -16,7 +16,6 @@
         android:layout_marginStart="@dimen/dimen20dp"
         android:layout_marginTop="@dimen/dimen60dp"
         android:layout_marginEnd="@dimen/dimen20dp"
-        android:background="@drawable/btn_bg"
         android:orientation="vertical"
         android:paddingTop="@dimen/dimen50dp"
         android:paddingBottom="@dimen/dimen50dp">
@@ -44,10 +43,12 @@
             <Spinner
                 android:id="@+id/periodList"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/dimen50dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="2.7"
                 android:background="@drawable/bg_spinner"
-                android:popupBackground="@drawable/bg_spinner_popup" />
+                android:hapticFeedbackEnabled="true"
+                android:minHeight="@dimen/dimen50dp"
+                android:spinnerMode="dialog" />
 
             <ImageView
                 android:id="@+id/dropDownButton"
@@ -74,36 +75,22 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/warning_temp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen50dp"
-        android:layout_above="@id/warningText"
-        android:layout_marginStart="@dimen/dimen80dp"
-        android:layout_marginTop="@dimen/dimen50dp"
-        android:layout_marginEnd="@dimen/dimen80dp"
-        android:background="@drawable/warn_temp"
-        android:contentDescription="@string/warning"
-        android:gravity="center"
-        android:padding="@dimen/dimen8dp"
-        android:textSize="@dimen/dimen15sp"
-        app:srcCompat="@drawable/ic_warning" />
 
     <TextView
-        android:id="@+id/warningText"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen50dp"
+        android:layout_height="wrap_content"
         android:layout_above="@id/credits"
-        android:layout_marginStart="@dimen/dimen80dp"
-        android:layout_marginEnd="@dimen/dimen80dp"
-        android:layout_marginBottom="@dimen/dimen20dp"
-        android:background="@drawable/warn_text"
+        android:layout_alignStart="@+id/credits"
+        android:layout_alignEnd="@+id/credits"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="@dimen/dimen12dp"
         android:gravity="center"
-        android:padding="@dimen/dimen8dp"
+        android:paddingStart="@dimen/dimen50dp"
+        android:paddingEnd="@dimen/dimen50dp"
         android:text="@string/warning_text"
-        android:textColor="@color/washed_btn_danger"
-        android:textSize="@dimen/dimen15sp" />
-
+        android:textColor="@color/washed_red"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/credits"
@@ -127,5 +114,6 @@
         android:gravity="center"
         android:text="@string/developer"
         android:textColor="@color/list_text" />
+
 
 </RelativeLayout>
