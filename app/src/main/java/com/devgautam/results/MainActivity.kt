@@ -6,12 +6,16 @@ package com.devgautam.results
         DESCRIPTION: Results Application
 
 */
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.DisplayMetrics
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -40,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        adjustFontScale(resources.configuration)
         getReferences() //get the references to the views
 
         setAdapterToSpinner() // set the adapter to the spinner
@@ -66,6 +70,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    @SuppressLint("ServiceCast")
+    private fun adjustFontScale(configuration: Configuration?) {
+        configuration?.let {
+            it.fontScale = 1.0F
+            val metrics: DisplayMetrics = resources.displayMetrics
+            val wm: WindowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            wm.defaultDisplay.getMetrics(metrics)
+            metrics.scaledDensity = configuration.fontScale * metrics.density
+
+            baseContext.applicationContext.createConfigurationContext(it)
+            baseContext.resources.displayMetrics.setTo(metrics)
+
+        }
+    }
+
     //function to get the references to the view used in this context
     private fun getReferences() {
         getId = findViewById(R.id.getId)
@@ -78,8 +98,8 @@ class MainActivity : AppCompatActivity() {
     //function to st the adapter to the spinner
     private fun setAdapterToSpinner() {
         val adapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.period, android.R.layout.simple_spinner_item
+            this,
+            R.array.period, android.R.layout.simple_spinner_item
         )
 //
 //        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,
@@ -122,7 +142,7 @@ class MainActivity : AppCompatActivity() {
     private fun hideKeyboard(view: View?) {
         try {
             val inputMethodManager: InputMethodManager =
-                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
             inputMethodManager.hideSoftInputFromWindow(view!!.windowToken, 0)
         } catch (ignored: java.lang.Exception) { //do nothing
@@ -147,11 +167,11 @@ class MainActivity : AppCompatActivity() {
         val mHandler = Handler(Looper.getMainLooper())
         val monitor = Runnable {
             startActivity(
-                    Intent(applicationContext, Results::class.java)
-                            .putExtra(ID_KEY, id!!)
-                            .putExtra(POSITION_KEY, position)
-                            .putExtra(PERIOD_KEY, period)
-                            .putExtra(SERIALIZABLE_LIST_KEY, list)
+                Intent(applicationContext, Results::class.java)
+                    .putExtra(ID_KEY, id!!)
+                    .putExtra(POSITION_KEY, position)
+                    .putExtra(PERIOD_KEY, period)
+                    .putExtra(SERIALIZABLE_LIST_KEY, list)
             ) //put the extras to new activity
         }
         mHandler.postDelayed(monitor, 500) //delays the intent to new activity

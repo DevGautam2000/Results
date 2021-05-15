@@ -8,13 +8,12 @@
     android:gravity="start"
     tools:context=".MainActivity">
 
-
     <LinearLayout
         android:id="@+id/form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen20dp"
-        android:layout_marginTop="@dimen/dimen60dp"
+        android:layout_marginTop="@dimen/dimen80dp"
         android:layout_marginEnd="@dimen/dimen20dp"
         android:orientation="vertical"
         android:paddingTop="@dimen/dimen50dp"
@@ -31,7 +30,7 @@
             android:gravity="center"
             android:hint="@string/enter_registration_num"
             android:inputType="number"
-            android:textSize="20sp" />
+            android:textSize="@dimen/dimen18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,6 +69,7 @@
             android:background="@drawable/btn_danger"
             android:text="@string/submit"
             android:textColor="@color/white"
+            android:textSize="@dimen/dimen15sp"
             app:backgroundTint="@null" />
 
 
@@ -90,6 +90,7 @@
         android:paddingEnd="@dimen/dimen50dp"
         android:text="@string/warning_text"
         android:textColor="@color/washed_red"
+        android:textSize="@dimen/dimen12sp"
         android:textStyle="italic" />
 
     <TextView
@@ -101,7 +102,8 @@
         android:layout_marginEnd="@dimen/dimen20dp"
         android:gravity="center"
         android:text="@string/results_fetched_from_smit"
-        android:textColor="@color/dark_blue_inversion" />
+        android:textColor="@color/dark_blue_inversion"
+        android:textSize="@dimen/dimen12sp" />
 
     <TextView
         android:id="@+id/developer"
@@ -113,7 +115,8 @@
         android:layout_marginBottom="@dimen/dimen20dp"
         android:gravity="center"
         android:text="@string/developer"
-        android:textColor="@color/list_text" />
+        android:textColor="@color/list_text"
+        android:textSize="@dimen/dimen12sp" />
 
 
 </RelativeLayout>

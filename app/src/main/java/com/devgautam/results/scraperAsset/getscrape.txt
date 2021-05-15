@@ -1,92 +1,149 @@
-import requests
-from bs4 import BeautifulSoup
+"""
+    AUTHOR: GAUTAM CHANDRA SAHA
+    DATE & TIME: 10/05/21 AT 10:36 AM
+
+"""
 import json
 
-# Declarations
-url = 'https://result.smuexam.in/ex24.php?eid=JANUARY%202021%20SUPPLEMENTARY%20EXAMINATIONS'
-nextUrl = []  # subject URLs
-header = {'User-Agent': 'Mozilla/5.0'}
-fileName = url[28:30]  # dynamic filename
+import requests
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.expected_conditions import presence_of_element_located as poel
+from selenium.webdriver.support.wait import WebDriverWait
+
+cgpa_uri = ''
+grade_uri = ''
+join_uri = 'https://result.smuexam.in/'
+fileName = grade_uri[26:30]
+errors = []
+
+headers = {
+    'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) '
+                  'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Mobile Safari/537.36'
+}
 
 
-def getscrap():
-    # declarations
-    fullDict = {}  # full dictionary
-    # create a new session
+def main():
+    cardUrl = []
+    infoDict = {}
     session = requests.Session()
-    # get cookie from entry point
-    # cookie gets automatically stored in session
-    html = session.get(url.strip(), headers=header)
-    soup = BeautifulSoup(html.content, 'html.parser')
+    outerHtml = session.get(grade_uri, headers=headers)
+    soup = BeautifulSoup(outerHtml.content, 'lxml')
 
-    for div in soup.find_all("div", {"class": "card-body"}):
-        for paragraph in div.select("p"):
-            for link in paragraph.select("a"):
-                href = link['href']
-                subcode = href[href.index('=') + 1:]
-                nextUrl.append(
-                    "https://result.smuexam.in/grade.php?subid=" + subcode)
+    get_all_card_uri(cardUrl, soup)
 
-    for urliter in nextUrl:
-        count = 1
-        code = "SUB"
-        credit = 0.0
-        reg = 0
-        name = ""
-        html = session.get(urliter.strip(), headers=header)
-        soup = BeautifulSoup(html.content, 'html.parser')
+    for links in cardUrl:
+        outerHtml = session.get(links, headers=headers)
+        soup = BeautifulSoup(outerHtml.content, 'lxml')
 
-        writeTextFile = open("{}.txt".format(fileName), "w")
-        writeTextFile.write(soup.find('pre').getText())
-        writeTextFile.close()
+        write_text_to_file(soup)
+        read_file(infoDict)
 
-        readTextFile = open("{}.txt".format(fileName))
-        line = readTextFile.readline()
+    # print(len(infoDict))
+    drive_browser(infoDict)
+    write_to_json(infoDict)
+    errors.clear()
 
-        while line:
-            print(f"line1: {line}")
-            line = line.strip().split()
-            print(f"line2: {line}")
 
-            if((len(line) > 0 and line[0] == "File") or (len(line) > 0 and (line[0] == "P>35" or line[2] == "F<35"))):
-                break
-            elif (len(line) == 0 or line[0][0:3] == "REG" or line[0][0:3] == "SIK" or line[0][0:3] == "GRA" or line[0][
-                0:3] == "Abb" or
-                    line[0][0:3] == "Abs" or line[0][0:3] == "S>=" or line[0][0:3] == "P>=" or line[0][0:3] == "Sto" or
-                    line[0][0:3] == "Gra"):
-                line = readTextFile.readline()
-                continue
-            elif (line[0] == "Subject"):
-                if (line[1] == "Code"):
-                    code = line[3]
-                elif (line[1] == "Title"):
-                    i = 3
-                    while (i < len(line)):
-                        name += line[i] + " "
-                        i += 1
-                elif (line[1] == "Credit"):
-                    credit = float(line[3][0:3])
-            else:
-                Dict = {}  # subject iteration
-                # print(f"reg: {reg}")
-                reg = int(line[0])
+def get_all_card_uri(cardUrl, soup):
+    for div in soup.findAll('div', class_='card-body'):
+        for para in div.select('p'):
+            for links in para.select('a'):
+                cardUrl.append(join_uri + links['href'])
 
-                fullDict[reg] = fullDict.get(reg, {})
-                Dict['sub'] = name
-                Dict['int'] = line[1]
-                Dict['ext'] = line[2]
-                Dict['tot'] = line[3]
-                Dict['grade'] = line[4]
-                Dict['credit'] = credit
-                fullDict[reg][code] = Dict
-            line = readTextFile.readline()
 
-        readTextFile.close()
+def write_text_to_file(soup):
+    write = open(f"{fileName}.txt", 'w')
+    write.write(soup.find('pre').getText())
+    write.close()
 
-    jsonDump = open("{}.json".format(fileName), "w")
-    jsonDump.write(json.dumps(fullDict))
-    jsonDump.close()
+
+def read_file(infoDict):
+    read = open(f"{fileName}.txt", 'r')
+    read_text_from_file(infoDict, read)
+    read.close()
+
+
+def read_text_from_file(infoDict, read):
+    code = ""
+    sub = ""
+    credit = 0
+
+    line = read.readline()
+    while len(line) > 0:
+        line = line.split()
+
+        if len(line) > 0 and line[0] == 'Subject':
+            if line[1] == "Code":
+                code = line[3]
+
+            elif line[1] == "Title":
+                sub = " ".join(line[3:])
+
+            elif line[1] == "Credit":
+                if len(line) >= 4:
+                    credit = line[3]
+
+        else:
+            try:
+                if len(line) > 0:
+                    regId = int(line[0])
+                    infoDict[regId] = infoDict.get(regId, {})
+                    infoDict[regId][code] = {
+                        'sub': sub,
+                        'internal': line[1],
+                        'external': line[2],
+                        'total': line[3],
+                        'credit': credit,
+                        'grade': line[4]
+                    }
+
+            except Exception as e:
+                errors.append(e)
+        line = read.readline()
+
+
+def drive_browser(infoDict):
+    # count = 0
+
+    name = "NA"
+    for key in infoDict:
+        try:
+            driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver")
+            wait = WebDriverWait(driver, 10)
+            driver.get(cgpa_uri)
+
+            driver.find_element_by_xpath(
+                "//input[@name='search']").send_keys(key)
+
+            driver.find_element_by_xpath(
+                "//button[@class='searchButton']").click()
+
+            generator = wait.until(
+                poel((By.XPATH, "//section[@id='portfolio']/div/div/div[1]")))
+
+            txt = generator.text.split('\n')
+            if len(txt) > 1:
+                joinString = txt[2]
+                joinString = joinString.split(":")
+                name = joinString[1].strip()
+                # print(f"{count}) {name}")  # print statement here
+                # count += 1
+            infoDict[key]['name'] = name
+
+            driver.close()
+
+        except Exception as e:
+            errors.append(e)
+            # print(f"{key}: not found")
+
+
+def write_to_json(infoDict):
+    _json = open(f"{fileName}.json", 'w')
+    _json.write(json.dumps(infoDict))
+    _json.close()
 
 
 if __name__ == "__main__":
-    getscrap()
+    main()

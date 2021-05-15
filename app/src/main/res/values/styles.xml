@@ -38,7 +38,9 @@
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">4dp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/white</item>
+
     </style>
 
     <style name="text_style">
@@ -53,5 +55,9 @@
     <style name="spinnerTheme" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
         <item name="strokeColor">@color/inverted_black</item>
         <item name="actionMenuTextColor">@color/inverted_black</item>
+    </style>
+
+    <style name="text_small">
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

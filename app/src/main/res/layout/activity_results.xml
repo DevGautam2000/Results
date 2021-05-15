@@ -17,7 +17,7 @@
         android:gravity="center"
         android:padding="@dimen/dimen12dp"
         android:textColor="@color/white"
-        android:textSize="@dimen/dimen25sp"
+        android:textSize="@dimen/dimen20dp"
         android:visibility="visible"
         tools:text="@string/gpa_9_47" />
 
@@ -30,7 +30,7 @@
         android:gravity="center"
         android:padding="@dimen/dimen9dp"
         android:textColor="@color/washed_purple_inversion"
-        android:textSize="@dimen/dimen17sp"
+        android:textSize="@dimen/dimen15dp"
         android:textStyle="bold"
         android:visibility="visible"
         tools:text="@string/name" />
@@ -44,7 +44,7 @@
         android:gravity="center"
         android:padding="@dimen/dimen9dp"
         android:textColor="@color/dark_blue_inversion"
-        android:textSize="@dimen/dimen15sp"
+        android:textSize="@dimen/dimen15dp"
         android:visibility="visible"
         tools:text="@string/info" />
     <!--        tools:text="ID: 201900099 for May/June 2020" />-->
