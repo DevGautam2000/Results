@@ -41,6 +41,7 @@
 
     <string-array name="period">
         <item>select period</item>
+        <item>May/June 2021</item>
         <item>March Sem(First Year Only) 2021</item>
         <item>Jan Supplementary 2021</item>
         <item>Nov/Dec 2020</item>

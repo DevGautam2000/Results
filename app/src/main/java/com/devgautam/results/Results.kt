@@ -47,6 +47,7 @@ class Results : AppCompatActivity() {
 
     //list to store the links to be fetched from
     private val uriList: List<String> = listOf(
+        may_june_2021,
         march_sem_first_year_only_2021,
         jan_supplementary_2021,
         nov_dec_2020,
@@ -63,6 +64,8 @@ class Results : AppCompatActivity() {
     )
 
     companion object {
+        const val may_june_2021 =
+            "https://devgautam2000.github.io/results.github.io/json/21.may_june_2021.json"
         const val march_sem_first_year_only_2021 =
             "https://devgautam2000.github.io/results.github.io/json/21_march_semester(first%20year%20only)_2021.json"
         const val jan_supplementary_2021 =
